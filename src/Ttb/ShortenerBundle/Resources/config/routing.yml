@@ -1,0 +1,3 @@
+ttb_shortener_homepage:
+    path:     /shrink/{url}
+    defaults: { _controller: TtbShortenerBundle:Default:index }
