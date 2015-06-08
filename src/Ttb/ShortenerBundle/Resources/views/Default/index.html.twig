@@ -1,3 +1,4 @@
-Source url: {{ url }}!
-<br>
-val: {{ val }}
+{{ form_start(form) }}
+<div>{{ form_label(form.full_url) }}</div>
+<div>{{ form_widget(form.full_url) }}</div>
+{{ form_end(form) }}
