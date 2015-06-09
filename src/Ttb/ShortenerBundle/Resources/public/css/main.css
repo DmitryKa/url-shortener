@@ -1,0 +1,8 @@
+.wrapper {
+    width: 800px;
+    margin: 50px auto;
+}
+.url-label {
+    padding-top: 2px;
+    font-size: 1.5em;
+}
