@@ -1,4 +1,6 @@
 {{ form_start(form) }}
+{{ form_errors(form) }}
 <div>{{ form_label(form.full_url) }}</div>
 <div>{{ form_widget(form.full_url) }}</div>
+<div>{{ form_errors(form.full_url) }}</div>
 {{ form_end(form) }}

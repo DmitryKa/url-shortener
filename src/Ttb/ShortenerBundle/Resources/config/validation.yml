@@ -1,4 +1,4 @@
 Ttb\Entity\Url:
-  properites:
+  properties:
     full_url:
       - NotBlank: ~
