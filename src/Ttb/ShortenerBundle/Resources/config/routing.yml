@@ -3,5 +3,5 @@ ttb_shortener_homepage:
     defaults: { _controller: TtbShortenerBundle:Default:index }
 
 ttb_shortener_shrinker:
-    path:     /shrink/{url}
+    path:     /shrink/{full_url}
     defaults: { _controller: TtbShortenerBundle:Default:shrink }
