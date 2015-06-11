@@ -42,22 +42,10 @@ class DefaultController extends Controller
         $converter = $this->get('converter');
         $redis = $this->container->get('snc_redis.default');
 
-        $hash = hash('sha256', $full_url);
-        $keys = $redis->smembers(self::PREFIX_HASH . $hash);
-        $created = false;
-
-        foreach($keys as $key) {
-            $full_url_existent = $redis->get(self::PREFIX_KEY . $key);
-            if ($full_url == $full_url_existent) {
-                $created = true;
-            }
-        }
-        if(!$created) {
-            $counter = $redis->incr(self::PREFIX_CONFIG . 'counter');
-            $key = $converter->base62_encode($counter);
-            $redis->set(self::PREFIX_KEY . $key, $full_url);
-            $redis->sadd(self::PREFIX_HASH . $hash, $key);
-        }
+        $hash_hex = hash('sha256', $full_url);
+        $trimmed_hash_dec = substr(gmp_strval(gmp_init($hash_hex,16)), 0, 19);
+        $key = substr($converter->base62_encode($trimmed_hash_dec), 0, 6);
+        $redis->set(self::PREFIX_KEY . $key, $full_url);
 
         return $this->render('TtbShortenerBundle:Default:shrink.html.twig',
           array('key' => $key)
