@@ -1,7 +1,11 @@
 ttb_shortener_homepage:
-    path:     /shrink
+    path:     /
     defaults: { _controller: TtbShortenerBundle:Default:index }
 
+ttb_shortener_expander:
+    path:     /{key}
+    defaults: { _controller: TtbShortenerBundle:Default:expand }
+
 ttb_shortener_shrinker:
-    path:     /shrink/{full_url}
+    path:     /shrink_/{full_url}
     defaults: { _controller: TtbShortenerBundle:Default:shrink }
