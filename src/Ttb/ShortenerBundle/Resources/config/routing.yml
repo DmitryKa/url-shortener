@@ -9,3 +9,5 @@ ttb_shortener_expander:
 ttb_shortener_shrinker:
     path:     /shrink_/{full_url}
     defaults: { _controller: TtbShortenerBundle:Default:shrink }
+    requirements:
+            full_url: .+
