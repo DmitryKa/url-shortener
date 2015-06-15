@@ -10,8 +10,6 @@ use Ttb\Form\Type\UrlType;
 class DefaultController extends Controller
 {
     const PREFIX_KEY = 'key:';
-    const PREFIX_HASH = 'hash:';
-    const PREFIX_CONFIG = 'config:';
 
     public function indexAction(Request $request)
     {
