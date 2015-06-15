@@ -19,7 +19,7 @@ class DefaultController extends Controller
 
         $form->handleRequest($request);
 
-        if($form->isValid())
+        if($form->getData()['full_url'] != NULL)
         {
             $full_url = $form->getData()['full_url'];
             return $this->forward('TtbShortenerBundle:Default:shrink',

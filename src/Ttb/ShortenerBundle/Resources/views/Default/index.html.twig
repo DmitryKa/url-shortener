@@ -1,7 +1,7 @@
 {% extends '::base.html.twig' %}
 
 {% block body %}
-    {{ form_start(form) }}
+    {{ form_start(form, { 'attr': { 'id': 'url_form', 'onsubmit': 'return validateUrl()' } } ) }}
     {{ form_errors(form) }}
     <div class="row">
         <div class="form-group">
@@ -16,4 +16,9 @@
         </div>
     </div>
     {{ form_end(form) }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('bundles/ttbshortener/js/main.js') }}"></script>
 {% endblock %}
