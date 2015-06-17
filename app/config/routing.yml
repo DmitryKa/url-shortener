@@ -1,5 +1,5 @@
-ttb_shortener:
-    resource: "@TtbShortenerBundle/Resources/config/routing.yml"
+shortener:
+    resource: "@ShortenerBundle/Resources/config/routing.yml"
     prefix:   /
 
 acme_demo:

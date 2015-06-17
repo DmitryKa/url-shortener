@@ -1,6 +1,6 @@
 <?php
 
-namespace Ttb\ShortenerBundle\Service;
+namespace ShortenerBundle\Service;
 
 class Converter {
     private $base = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';

@@ -1,6 +1,6 @@
 <?php
 
-namespace Ttb\ShortenerBundle\Tests\Controller;
+namespace ShortenerBundle\Tests\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 

@@ -1,11 +1,10 @@
 <?php
 
-namespace Ttb\ShortenerBundle\Controller;
+namespace ShortenerBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
-use Ttb\Entity\Url;
-use Ttb\Form\Type\UrlType;
+use ShortenerBundle\Form\Type\UrlType;
 
 class DefaultController extends Controller
 {
@@ -20,10 +19,10 @@ class DefaultController extends Controller
         if($form->getData()['full_url'] != NULL)
         {
             $full_url = $form->getData()['full_url'];
-            return $this->forward('TtbShortenerBundle:Default:shrink',
+            return $this->forward('ShortenerBundle:Default:shrink',
               array('full_url' => $full_url));
         }
-        return $this->render('TtbShortenerBundle:Default:index.html.twig',
+        return $this->render('ShortenerBundle:Default:index.html.twig',
           array('form' => $form->createView()));
     }
 
@@ -31,7 +30,7 @@ class DefaultController extends Controller
         $redis = $this->container->get('snc_redis.default');
         $full_url = $redis->get(self::PREFIX_KEY . $key);
         if(!$full_url) {
-            return $this->forward('TtbShortenerBundle:Default:index');
+            return $this->forward('ShortenerBundle:Default:index');
         }
         return $this->redirect($full_url);
     }
@@ -45,7 +44,7 @@ class DefaultController extends Controller
         $key = substr($converter->base62_encode($trimmed_hash_dec), 0, 6);
         $redis->set(self::PREFIX_KEY . $key, $full_url);
 
-        return $this->render('TtbShortenerBundle:Default:shrink.html.twig',
+        return $this->render('ShortenerBundle:Default:shrink.html.twig',
           array('key' => $key)
         );
     }

@@ -81,7 +81,7 @@ swiftmailer:
 
 services:
     converter:
-        class: Ttb\ShortenerBundle\Service\Converter
+        class: ShortenerBundle\Service\Converter
 
 snc_redis:
     clients:

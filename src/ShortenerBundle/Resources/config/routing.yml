@@ -1,0 +1,13 @@
+shortener_homepage:
+    path:     /
+    defaults: { _controller: ShortenerBundle:Default:index }
+
+shortener_expander:
+    path:     /{key}
+    defaults: { _controller: ShortenerBundle:Default:expand }
+
+shortener_shrinker:
+    path:     /shrink_/{full_url}
+    defaults: { _controller: ShortenerBundle:Default:shrink }
+    requirements:
+            full_url: .+
