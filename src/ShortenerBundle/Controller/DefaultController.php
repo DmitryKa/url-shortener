@@ -5,6 +5,7 @@ namespace ShortenerBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use ShortenerBundle\Form\Type\UrlType;
+use Symfony\Component\Security\Core\SecurityContext;
 
 class DefaultController extends Controller
 {
@@ -47,5 +48,22 @@ class DefaultController extends Controller
         return $this->render('ShortenerBundle:Default:shrink.html.twig',
           array('key' => $key)
         );
+    }
+
+    public function protectedAction() {
+        return $this->render('ShortenerBundle:Default:protected.html.twig');
+    }
+
+    public function loginAction() {
+        if ($this->get('request')->attributes->has(SecurityContext::AUTHENTICATION_ERROR)) {
+            $error = $this->get('request')->attributes->get(SecurityContext::AUTHENTICATION_ERROR);
+        } else {
+            $error = $this->get('request')->getSession()->get(SecurityContext::AUTHENTICATION_ERROR);
+        }
+
+        return $this->render('ShortenerBundle:Default:login.html.twig', array(
+          'last_username' => $this->get('request')->getSession()->get(SecurityContext::LAST_USERNAME),
+          'error' => $error
+        ));
     }
 }

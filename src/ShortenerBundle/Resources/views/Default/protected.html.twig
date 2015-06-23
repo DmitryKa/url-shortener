@@ -1,0 +1,8 @@
+This page should be accessible only after login.
+
+
+{% if is_granted('IS_AUTHENTICATED_FULLY') %}
+    <a href="{{ path('_security_logout') }}">
+        Выход
+    </a>
+{% endif %}
