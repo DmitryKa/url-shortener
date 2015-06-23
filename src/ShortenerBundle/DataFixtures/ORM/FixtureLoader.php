@@ -22,7 +22,7 @@ class FixtureLoader implements FixtureInterface {
         // создание пользователя
         $user = new User();
         $user->setEmail('john@example.com');
-        $user->setUsername('john.doe');
+        $user->setUsername('john');
         $user->setSalt(md5(time()));
 
         // шифрует и устанавливает пароль для пользователя,

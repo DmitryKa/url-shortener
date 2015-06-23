@@ -6,7 +6,7 @@ security:
             iterations: 10
 
     providers:
-        main:
+        my_entity_prov:
             entity: { class: ShortenerBundle:User, property: username }
 
     firewalls:
@@ -25,7 +25,7 @@ security:
             logout: true
             security: true
             anonymous: true
-            provider: main
+            provider: my_entity_prov
 
     access_control:
         - { path: /admin/.*, role: ROLE_ADMIN }
