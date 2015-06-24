@@ -5,30 +5,20 @@ use Symfony\Component\Security\Core\Role\RoleInterface;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity
- * @ORM\Table(name="role")
  */
 class Role implements RoleInterface
 {
     /**
-     * @ORM\Id
-     * @ORM\Column(type="integer")
-     * @ORM\GeneratedValue(strategy="AUTO")
-     *
      * @var integer $id
      */
     protected $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
-     *
      * @var string $name
      */
     protected $name;
 
     /**
-     * @ORM\Column(type="datetime", name="created_at")
-     *
      * @var \DateTime $createdAt
      */
     protected $createdAt;

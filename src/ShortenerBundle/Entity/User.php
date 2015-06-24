@@ -7,54 +7,35 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
- * @ORM\Entity
- * @ORM\Table(name="user")
  */
 class User implements UserInterface, \Serializable
 {
 
     /**
-     * @ORM\Id
-     * @ORM\Column(type="integer")
-     * @ORM\GeneratedValue(strategy="AUTO")
      */
     protected $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
-     *
      * @var string email
      */
     protected $email;
 
     /**
-     * @ORM\Column(type="string", length=255)
-     *
      * @var string username
      */
     protected $username;
 
     /**
-     * @ORM\Column(type="string", length=255)
-     *
      * @var string password
      */
     protected $password;
 
     /**
-     * @ORM\Column(type="string", length=255)
-     *
      * @var string salt
      */
     protected $salt;
 
     /**
-     * @ORM\ManyToMany(targetEntity="Role")
-     * @ORM\JoinTable(name="user_role",
-     *     joinColumns={@ORM\JoinColumn(name="user_id", referencedColumnName="id")},
-     *     inverseJoinColumns={@ORM\JoinColumn(name="role_id", referencedColumnName="id")}
-     * )
-     *
      * @var ArrayCollection $userRoles
      */
     protected $userRoles;
