@@ -79,10 +79,6 @@ swiftmailer:
     password:  "%mailer_password%"
     spool:     { type: memory }
 
-services:
-    converter:
-        class: ShortenerBundle\Service\Converter
-
 snc_redis:
     clients:
         default:
