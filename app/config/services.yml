@@ -9,3 +9,8 @@ services:
 #        arguments: ["@another_service_name", "plain_value", "%parameter_name%"]
     converter:
         class: ShortenerBundle\Service\Converter
+    ib_user.oauth_user_provider:
+        class: ShortenerBundle\Auth\OAuthProvider
+        arguments: [@session, @doctrine, @service_container]
+    hwi_oauth.user.provider.entity:
+        class: HWI\Bundle\OAuthBundle\Security\Core\User\OAuthUserProvider

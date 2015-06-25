@@ -105,3 +105,11 @@ snc_redis:
                 - redis://localhost/3?weight=10
                 - redis://localhost/4?weight=5
                 - redis://localhost/5?weight=1
+hwi_oauth:
+    firewall_name: main
+    resource_owners:
+        google:
+            type:                google
+            client_id:           292315847837-68kde3q0g8f0g9v3fplgsh2c0933b67h.apps.googleusercontent.com
+            client_secret:       BUwo4nbLQCgjxKBAHI_Z-aKc
+            scope:               "https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile"

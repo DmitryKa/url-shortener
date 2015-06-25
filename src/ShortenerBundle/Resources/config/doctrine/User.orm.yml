@@ -18,6 +18,9 @@ ShortenerBundle\Entity\User:
         salt:
             type: string
             length: 255
+        googleId:
+            type: string
+            length: 255
     manyToMany:
         userRoles:
             targetEntity: Role

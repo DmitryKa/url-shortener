@@ -1,11 +1,21 @@
 security:
+    acl:
+        connection: default
+
     encoders:
         ShortenerBundle\Entity\User:
             algorithm: sha512
             encode-as-base64: true
             iterations: 10
 
+    role_hierarchy:
+        ROLE_USER: ROLE_USER
+        ROLE_ADMIN: ROLE_USER
+        ROLE_SUPER_ADMIN: [ ROLE_USER, ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH ]
+
     providers:
+        my_custom_hwi_provider:
+            id: ib_user.oauth_user_provider
         my_entity_prov:
             entity: { class: ShortenerBundle:User, property: username }
 
@@ -17,16 +27,33 @@ security:
 #        default:
 #            anonymous: ~
 
+#        main:
+#            pattern: ^/*
+#            form_login:
+#                check_path: /login_check
+#                login_path: /login
+#            logout: true
+#            security: true
+#            anonymous: true
+#            provider: my_entity_prov
         main:
-            pattern: ^/*
-            form_login:
-                check_path: /login_check
-                login_path: /login
-            logout: true
-            security: true
+            pattern: ^/
             anonymous: true
-            provider: my_entity_prov
+            logout: true
+            logout:
+                path:   /logout
+                target: /
+            oauth:
+                resource_owners:
+                    google: "/login/check-google"
+                login_path: /login
+                failure_path: /login
+                oauth_user_provider:
+                    service: ib_user.oauth_user_provider
 
     access_control:
         - { path: /admin/.*, role: ROLE_ADMIN }
         - { path: /.*, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/admin/users, roles: ROLE_SUPER_ADMIN }
+        - { path: ^/presence, roles: ROLE_ADMIN }
+        - { path: ^/user, roles: ROLE_USER }
