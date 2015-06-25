@@ -31,7 +31,7 @@ class DefaultController extends Controller
         $redis = $this->container->get('snc_redis.default');
         $full_url = $redis->get(self::PREFIX_KEY . $key);
         if(!$full_url) {
-            return $this->forward('ShortenerBundle:Default:index');
+            return $this->createNotFoundException('URL with such key is not found');
         }
         return $this->redirect($full_url);
     }
