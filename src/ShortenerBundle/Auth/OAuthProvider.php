@@ -5,6 +5,7 @@ namespace ShortenerBundle\Auth;
 use HWI\Bundle\OAuthBundle\Security\Core\User\OAuthUserProvider;
 use HWI\Bundle\OAuthBundle\OAuth\Response\UserResponseInterface;
 use ShortenerBundle\Entity\User;
+use ShortenerBundle\Entity\Role;
 
 class OAuthProvider extends OAuthUserProvider
 {
@@ -51,16 +52,32 @@ class OAuthProvider extends OAuthUserProvider
             ->where('u.googleId = :gid')
             ->setParameter('gid', $google_id)
             ->setMaxResults(1);
-        $result = $qb->getQuery()->getResult();
+        $users = $qb->getQuery()->getResult();
 
-        //add to database if doesn't exists
-        if (!count($result)) {
+        $qb = $this->doctrine->getManager()->createQueryBuilder();
+        $qb->select('r')
+            ->from('ShortenerBundle:Role', 'r')
+            ->where('r.name = :name')
+            ->setParameter('name', 'ROLE_AUTHENTICATED_USER');
+        $roles = $qb->getQuery()->getResult();
+
+        $em = $this->doctrine->getManager();
+
+        if(!count($roles)) {
+            #TODO handle this case
+            var_dump("requested role doesn't exist"); die;
+        } else {
+            $role = $roles[0];
+        }
+
+        //add to database if doesn't exist
+        if (!count($users)) {
             $user = new User();
             $user->setUsername($google_id);
             $user->setGoogleId($google_id);
             $user->setEmail($email);
             $user->setSalt(md5(time()));
-            //$user->setRoles('ROLE_USER');
+            $user->getUserRoles()->add($role);
 
             //Set some wild random pass since its irrelevant, this is Google login
             $factory = $this->container->get('security.encoder_factory');
@@ -68,11 +85,10 @@ class OAuthProvider extends OAuthUserProvider
             $password = $encoder->encodePassword(md5(uniqid()), $user->getSalt());
             $user->setPassword($password);
 
-            $em = $this->doctrine->getManager();
             $em->persist($user);
             $em->flush();
         } else {
-            $user = $result[0]; /* return User */
+            $user = $users[0]; /* return User */
         }
 
         //set id
