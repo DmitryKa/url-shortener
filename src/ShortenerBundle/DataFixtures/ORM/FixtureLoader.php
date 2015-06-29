@@ -13,27 +13,27 @@ use Symfony\Component\Security\Core\Encoder\MessageDigestPasswordEncoder;
 
 class FixtureLoader implements FixtureInterface {
     public function load(ObjectManager $manager) {
-        // создание роли ROLE_ADMIN
+////         создание роли ROLE_ADMIN
         $role = new Role();
-        $role->setName('ROLE_ADMIN');
+        $role->setName('ROLE_AUTHENTICATED_USER');
 
         $manager->persist($role);
 
-        // создание пользователя
-        $user = new User();
-        $user->setEmail('john@example.com');
-        $user->setUsername('john');
-        $user->setSalt(md5(time()));
-
-        // шифрует и устанавливает пароль для пользователя,
-        // эти настройки совпадают с конфигурационными файлами
-        $encoder = new MessageDigestPasswordEncoder('sha512', TRUE, 10);
-        $password = $encoder->encodePassword('admin', $user->getSalt());
-        $user->setPassword($password);
-
-        $user->getUserRoles()->add($role);
-
-        $manager->persist($user);
+//        // создание пользователя
+//        $user = new User();
+//        $user->setEmail('john@example.com');
+//        $user->setUsername('john');
+//        $user->setSalt(md5(time()));
+//
+//        // шифрует и устанавливает пароль для пользователя,
+//        // эти настройки совпадают с конфигурационными файлами
+//        $encoder = new MessageDigestPasswordEncoder('sha512', TRUE, 10);
+//        $password = $encoder->encodePassword('admin', $user->getSalt());
+//        $user->setPassword($password);
+//
+//        $user->getUserRoles()->add($role);
+//
+//        $manager->persist($user);
         $manager->flush();
     }
 }
