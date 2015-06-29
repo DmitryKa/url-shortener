@@ -27,7 +27,7 @@ class Abbreviation
     /**
      * @var string comment to url
      */
-    protected $comment;
+    protected $comment = null;
 
     /**
      * @return mixed

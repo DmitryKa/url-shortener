@@ -15,6 +15,7 @@ ShortenerBundle\Entity\Abbreviation:
         comment:
             type: string
             length: 255
+            nullable: TRUE
     manyToOne:
         userId:
           targetEntity: User
