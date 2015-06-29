@@ -11,6 +11,7 @@ class UrlType extends AbstractType
     {
         $builder
           ->add('full_url', 'text', array('label' => 'URL:'))
+          ->add('comment', 'text', array('label' => 'Comment:'))
           ->add('save', 'submit', array('label'=>'Make it short!'));
     }
 

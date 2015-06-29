@@ -21,8 +21,9 @@ class DefaultController extends Controller
         if($form->getData()['full_url'] != NULL)
         {
             $full_url = $form->getData()['full_url'];
+            $comment = $form->getData()['comment'];
             return $this->forward('ShortenerBundle:Default:shrink',
-              array('full_url' => $full_url));
+              array('full_url' => $full_url, 'comment' => $comment));
         }
 
         $userId = $request->getSession()->get('id');
@@ -46,7 +47,7 @@ class DefaultController extends Controller
         return $this->redirect($full_url);
     }
 
-    public function shrinkAction($full_url, Request $request) {
+    public function shrinkAction($full_url, $comment, Request $request) {
         $converter = $this->get('converter');
         $redis = $this->container->get('snc_redis.default');
 
@@ -62,6 +63,7 @@ class DefaultController extends Controller
             $abb = new Abbreviation();
             $abb->setClue($clue);
             $abb->setFullUrl($full_url);
+            $abb->setComment($comment);
 
             $userId = $request->getSession()->get('id');
             $qb = $em->createQueryBuilder();

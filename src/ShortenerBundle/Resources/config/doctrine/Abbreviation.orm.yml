@@ -12,6 +12,9 @@ ShortenerBundle\Entity\Abbreviation:
         fullUrl:
             type: string
             length: 255
+        comment:
+            type: string
+            length: 255
     manyToOne:
         userId:
           targetEntity: User

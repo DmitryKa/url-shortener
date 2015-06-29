@@ -25,6 +25,11 @@ class Abbreviation
     protected $userId;
 
     /**
+     * @var string comment to url
+     */
+    protected $comment;
+
+    /**
      * @return mixed
      */
     public function getId()
@@ -78,5 +83,21 @@ class Abbreviation
     public function setUserId($userId)
     {
         $this->userId = $userId;
+    }
+
+    /**
+     * @return string
+     */
+    public function getComment()
+    {
+        return $this->comment;
+    }
+
+    /**
+     * @param string $comment
+     */
+    public function setComment($comment)
+    {
+        $this->comment = $comment;
     }
 }
