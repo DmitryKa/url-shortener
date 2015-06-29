@@ -21,8 +21,7 @@
         <div class="text-align-center social-buttons">
             <a href="{{ hwi_oauth_login_url(hwi_oauth_resource_owners()[0]) }}" class="btn btn-default">{{ 'Sign in via Google' }}</a>
         </div>
-    {% endif %}
-    {% if is_granted('ROLE_AUTHENTICATED_USER') %}
+    {% else %}
         <a href="{{ url('_security_logout') }}" class="logout-link">Sign out</a>
         <table class="table table-hover">
             <thead>
