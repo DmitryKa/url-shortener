@@ -22,6 +22,9 @@
                 <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
                     {{ form_widget(form.comment, { 'attr': { 'class': 'form-control' } }) }}
                 </div>
+                <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
+                    <a href="{{ url('_security_logout') }}" class="btn btn-default">Sign out</a>
+                </div>
             </div>
         </div>
     {% else %}
@@ -33,7 +36,6 @@
             <a href="{{ hwi_oauth_login_url(hwi_oauth_resource_owners()[0]) }}" class="btn btn-default">{{ 'Sign in via Google' }}</a>
         </div>
     {% else %}
-        <a href="{{ url('_security_logout') }}" class="logout-link">Sign out</a>
         <table class="table table-hover">
             <thead>
                 <tr class="info">

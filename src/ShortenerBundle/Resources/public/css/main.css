@@ -13,10 +13,4 @@
 }
 .text-align-center { text-align: center; }
 .social-buttons, .recent-links { margin-top: 1.5em }
-.logout-link {
-    float: right;
-    position: relative;
-    top: 28px;
-    z-index: 777;
-    padding-right: 20px;
-}
+.row { padding: 8px 0 }
