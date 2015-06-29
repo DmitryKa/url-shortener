@@ -24,14 +24,22 @@
     {% endif %}
     {% if is_granted('ROLE_AUTHENTICATED_USER') %}
         <a href="{{ url('_security_logout') }}" class="logout-link">Sign out</a>
-        <ul class="list-group recent-links">
-            <li class="list-group-item list-group-item-info">Recent links:</li>
-            {% for url in urls %}
-                <li class="list-group-item">
-                    <a href="{{ url.fullUrl }}">{{ url('shortener_homepage') }}{{ url.clue }}</a>
-                </li>
-            {% endfor %}
-        </ul>
+        <table class="table table-hover">
+            <thead>
+                <tr class="info">
+                    <th>Recent</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for url in urls %}
+                    <tr>
+                        <td><a href="{{ url.fullUrl }}">{{ url('shortener_homepage') }}{{ url.clue }}</a></td>
+                        <td><a href="{{ url.fullUrl }}">{{ url.fullUrl }}</a></td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
     {% endif %}
 {% endblock %}
 

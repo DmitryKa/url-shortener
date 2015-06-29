@@ -16,7 +16,7 @@
 .logout-link {
     float: right;
     position: relative;
-    top: 32px;
+    top: 28px;
     z-index: 777;
     padding-right: 20px;
 }
