@@ -12,5 +12,6 @@
     border-radius: 4px;
 }
 .text-align-center { text-align: center; }
-.social-buttons, .recent-links { margin-top: 1.5em }
+.google-auth-button, .social-buttons, .recent-links { margin-top: 1.5em }
 .row { padding: 8px 0 }
+.social-buttons { text-align: center; }

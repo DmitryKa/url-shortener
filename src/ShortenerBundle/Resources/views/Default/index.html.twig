@@ -32,7 +32,7 @@
     {% endif %}
     {{ form_end(form) }}
     {% if not is_granted('ROLE_AUTHENTICATED_USER') %}
-        <div class="text-align-center social-buttons">
+        <div class="text-align-center google-auth-button">
             <a href="{{ hwi_oauth_login_url(hwi_oauth_resource_owners()[0]) }}" class="btn btn-default">{{ 'Sign in via Google' }}</a>
         </div>
     {% else %}
@@ -55,6 +55,10 @@
             </tbody>
         </table>
     {% endif %}
+
+    <div class="social-buttons">
+        <script type="text/javascript" src="//yastatic.net/share/share.js" charset="utf-8"></script><div class="yashare-auto-init" data-yashareL10n="ru" data-yashareType="none" data-yashareQuickServices="vkontakte,facebook,twitter,odnoklassniki,lj,gplus"></div>
+    </div>
 {% endblock %}
 
 {% block javascripts %}
