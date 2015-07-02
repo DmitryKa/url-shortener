@@ -41,11 +41,6 @@ class User implements UserInterface, \Serializable
     protected $userRoles;
 
     /**
-     * @var string google_id
-     */
-    protected $googleId;
-
-    /**
      * Геттер для id пользователя.
      *
      * @return string The id.
@@ -133,26 +128,6 @@ class User implements UserInterface, \Serializable
     public function setSalt($value)
     {
         $this->salt = $value;
-    }
-
-    /**
-     * Геттер для google id.
-     *
-     * @return string The googleId.
-     */
-    public function getGoogleId()
-    {
-        return $this->googleId;
-    }
-
-    /**
-     * Сеттер для google id.
-     *
-     * @param string $value The googleId.
-     */
-    public function setGoogleId($value)
-    {
-        $this->googleId = $value;
     }
 
     /**

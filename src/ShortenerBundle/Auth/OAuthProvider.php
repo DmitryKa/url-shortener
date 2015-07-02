@@ -24,7 +24,7 @@ class OAuthProvider extends OAuthUserProvider
         $qb = $this->doctrine->getManager()->createQueryBuilder();
         $qb->select('u')
             ->from('ShortenerBundle:User', 'u')
-            ->where('u.googleId = :gid')
+            ->where('u.username = :gid')
             ->setParameter('gid', $username)
             ->setMaxResults(1);
         $result = $qb->getQuery()->getResult();
@@ -49,7 +49,7 @@ class OAuthProvider extends OAuthUserProvider
         $qb = $this->doctrine->getManager()->createQueryBuilder();
         $qb->select('u')
             ->from('ShortenerBundle:User', 'u')
-            ->where('u.googleId = :gid')
+            ->where('u.username = :gid')
             ->setParameter('gid', $google_id)
             ->setMaxResults(1);
         $users = $qb->getQuery()->getResult();
@@ -74,7 +74,6 @@ class OAuthProvider extends OAuthUserProvider
         if (!count($users)) {
             $user = new User();
             $user->setUsername($google_id);
-            $user->setGoogleId($google_id);
             $user->setEmail($email);
             $user->setSalt(md5(time()));
             $user->getUserRoles()->add($role);
