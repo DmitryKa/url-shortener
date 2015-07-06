@@ -181,24 +181,26 @@ class User implements UserInterface, \Serializable
     }
 
     /**
-     * Serializes the content of the current User object
+     * Serializes the content of the current User object.
+     * http://stackoverflow.com/questions/12251825/roleinterface-throws-call-on-a-non-object-error
      * @return string
      */
     public function serialize()
     {
         return \json_encode(
-            array($this->username, $this->password, $this->salt,
-                $this->userRoles, $this->id));
+            array($this->username, $this->email, $this->password,
+                $this->salt, $this->userRoles, $this->id));
     }
 
     /**
      * Unserializes the given string in the current User object
+     * http://stackoverflow.com/questions/12251825/roleinterface-throws-call-on-a-non-object-error
      * @param serialized
      */
     public function unserialize($serialized)
     {
-        list($this->username, $this->password, $this->salt,
-            $this->userRoles, $this->id) = \json_decode(
+        list($this->username, $this->email, $this->password,
+            $this->salt, $this->userRoles, $this->id) = \json_decode(
             $serialized);
     }
 }
