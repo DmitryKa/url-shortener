@@ -27,12 +27,10 @@ class DefaultController extends Controller
         }
 
         $userId = $request->getSession()->get('id');
-        $qb = $this->getDoctrine()->getManager()->createQueryBuilder();
-        $qb->select('u')
-            ->from('ShortenerBundle:Abbreviation', 'u')
-            ->where('u.userId = :userId')
-            ->setParameter('userId', $userId);
-        $saved_urls = $qb->getQuery()->getResult();
+        $saved_urls = $this
+            ->getDoctrine()
+            ->getRepository('ShortenerBundle:Abbreviation')
+            ->findByUserId($userId);
         return $this->render('ShortenerBundle:Default:index.html.twig',
           array('form' => $form->createView(), 'urls' =>$saved_urls));
     }
@@ -65,14 +63,12 @@ class DefaultController extends Controller
             $abb->setComment($comment);
 
             $userId = $request->getSession()->get('id');
-            $qb = $em->createQueryBuilder();
-            $qb->select('u')
-                ->from('ShortenerBundle:User', 'u')
-                ->where('u.id = :id')
-                ->setParameter('id', $userId);
-            $users = $qb->getQuery()->getResult();
 
-            $abb->setUserId($users[0]);
+            $user = $this
+                ->getDoctrine()
+                ->getRepository('ShortenerBundle:User')
+                ->findOneById($userId);
+            $abb->setUserId($user);
 
             $em->persist($abb);
             $em->flush();
