@@ -6,7 +6,7 @@ use ShortenerBundle\Entity\Abbreviation;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use ShortenerBundle\Form\Type\UrlType;
-use Symfony\Component\Security\Core\SecurityContext;
+use Symfony\Component\Security\Core\Security;
 
 class DefaultController extends Controller
 {
@@ -33,7 +33,6 @@ class DefaultController extends Controller
             ->where('u.userId = :userId')
             ->setParameter('userId', $userId);
         $saved_urls = $qb->getQuery()->getResult();
-//        var_dump($saved_urls[0]->getClue()); die;
         return $this->render('ShortenerBundle:Default:index.html.twig',
           array('form' => $form->createView(), 'urls' =>$saved_urls));
     }
@@ -89,14 +88,14 @@ class DefaultController extends Controller
     }
 
     public function loginAction() {
-        if ($this->get('request')->attributes->has(SecurityContext::AUTHENTICATION_ERROR)) {
-            $error = $this->get('request')->attributes->get(SecurityContext::AUTHENTICATION_ERROR);
+        if ($this->get('request')->attributes->has(Security::AUTHENTICATION_ERROR)) {
+            $error = $this->get('request')->attributes->get(Security::AUTHENTICATION_ERROR);
         } else {
-            $error = $this->get('request')->getSession()->get(SecurityContext::AUTHENTICATION_ERROR);
+            $error = $this->get('request')->getSession()->get(Security::AUTHENTICATION_ERROR);
         }
 
         return $this->render('ShortenerBundle:Default:login.html.twig', array(
-          'last_username' => $this->get('request')->getSession()->get(SecurityContext::LAST_USERNAME),
+          'last_username' => $this->get('request')->getSession()->get(Security::LAST_USERNAME),
           'error' => $error
         ));
     }
